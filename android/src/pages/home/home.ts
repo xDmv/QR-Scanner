@@ -9,6 +9,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 })
 export class HomePage {
 
+	barcode: any;
 	textbarcode: any;
 	QRtext: any;
 
@@ -33,25 +34,20 @@ export class HomePage {
 	ScanerQRScanner(){
 		this.qrScanner.prepare()
 		.then((status: QRScannerStatus) => {
-			this.status = 'Start QRScannerStatus';
 			if (status.authorized) {
 				this.qrScanner.show();
 				this.qrScanner.useBackCamera();
-				this.status = this.qrScanner.getStatus();
 				// camera permission was granted
 				// start scanning
 					let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-						this.status = 'this.qrScanner.scan';
 						console.log('Scanned something', text);
 						this.QRtext = text;
 						this.qrScanner.hide(); // hide camera preview
 						scanSub.unsubscribe(); // stop scanning
 					});
 			} else if (status.denied) {
-				this.status = 'status.denied...';
 				this.QRtext = 'status.denied';
 			} else {
-				this.status = 'this.QRtext ...';
 				this.QRtext = 'status.authorized';
 			}
 		})
