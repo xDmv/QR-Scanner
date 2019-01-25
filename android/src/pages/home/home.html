@@ -1,21 +1,32 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>
-			QR-code and bar code scaner
-		</ion-title>
+		<ion-title><span center>QR-scaner</span></ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	<p>
-		<button type="button" ion-button color="dark" (click)="ScanerBarcode()">Scaner QR-code</button>
+	<div *ngIf="!isLevelShown('idx')" class="{{show2}}">
+		<p>Инструкция использования данного приложения:</p>
+		<ol>
+			<li>Нажмите на кнопку</li>
+			<li>Наведите мобильный на QR-код</li>
+			<li>после сканирования экран закроется и отобразится результат сканирования</li>
+		</ol>
+	</div>
+	<p *ngIf="!isLevelShown('idx')" class="{{show2}}">
+		<button ion-button (click)="scan_qr_code();">Scaner</button>
 	</p>
-	<p>
-		<button type="button" ion-button color="dark" (click)="ScanerQRScanner()">Scaner BarcodeScanner</button>
-	</p>
-
-	<p padding>QR-code value = {{ QRtext | json }}</p>
-
-	<p padding>Status value = {{ textbarcode | json}}</p>
-
+	<p class="{{show2}}" padding *ngIf="!isLevelShown('idx')">Результат: {{ textQR }}</p>
 </ion-content>
+
+<div *ngIf="qrheader" class="div-scan">
+  <div class="scanner-object"></div>
+</div>
+
+<ion-footer *ngIf="qrheader">
+	<ion-row>
+		<ion-col col-4><ion-icon name="ios-arrow-dropleft-outline" class="qrscan-icon" (tap)="exit_from_qr_scan()"></ion-icon></ion-col>
+		<ion-col col-4><ion-icon name="flash" class="qrscan-icon" (tap)="light_enable_desable()"></ion-icon></ion-col>
+		<ion-col col-4><ion-icon name="camera" class="qrscan-icon" (tap)= "change_camera()"></ion-icon></ion-col>
+	</ion-row>
+</ion-footer>

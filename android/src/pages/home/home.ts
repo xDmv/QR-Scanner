@@ -1,57 +1,82 @@
 import { Component 			} from '@angular/core';
 import { NavController 		} from 'ionic-angular';
-import { BarcodeScanner 	} from '@ionic-native/barcode-scanner';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { QrScan 			} from '../../providers/qr-scan/qr-scan';
+import { ToolBox 			} from '../../providers/qr-scan/ToolBox';
 
 @Component({
-	selector: 			'page-home',
-	templateUrl: 		'home.html'
+	selector: 		'page-home',
+	templateUrl: 	'home.html'
 })
 export class HomePage {
-
-	barcode: any;
-	textbarcode: any;
-	QRtext: any;
-
+	qrheader	: boolean = false;
+	textQR		: string;
+	show 		= null;
+	show2		: string = "show";
 	constructor(
-		public navCtrl: NavController,
-		private barcodeScanner: BarcodeScanner,
-		private qrScanner: QRScanner
-	) {
+		public navCtrl		: NavController,
+		private qrscan		: QrScan) {
 
 	}
 
-	ScanerBarcode(){
-		this.barcodeScanner.scan().then((barcodeData) => {
-			this.barcode = barcodeData.text;
-			this.textbarcode = barcodeData.text;
-		}, (err) => {
-			this.barcode=err;
-			this.textbarcode = 'Error!';
-		});
+	ionViewDidLoad() {
+
 	}
 
-	ScanerQRScanner(){
-		this.qrScanner.prepare()
-		.then((status: QRScannerStatus) => {
-			if (status.authorized) {
-				this.qrScanner.show();
-				this.qrScanner.useBackCamera();
-				// camera permission was granted
-				// start scanning
-					let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-						console.log('Scanned something', text);
-						this.QRtext = text;
-						this.qrScanner.hide(); // hide camera preview
-						scanSub.unsubscribe(); // stop scanning
-					});
-			} else if (status.denied) {
-				this.QRtext = 'status.denied';
-			} else {
-				this.QRtext = 'status.authorized';
-			}
-		})
-		.catch((e: any) => console.log('Error is', e));
+	scan_qr_code() {
+		// this.toggleAccordion('idx');
+
+		this.show2 = "hide";
+		console.log('this.show2 = ',this.show2);
+		let self = this;
+		this.qrheader = true;
+		console.log("Scan start");
+		Promise.resolve("proceed")
+			.then((k) => {
+				return this.qrscan.scan();
+			}).then((qrcode) => {
+				if (qrcode == "" || qrcode == undefined) {
+					return Promise.reject("invalid_qr_code");
+				}
+				self.qrheader = false;
+				this.textQR = qrcode;
+				//alert("Value：" + qrcode);
+				// return  your_method_with_passing_qr(qrcode);
+			}).then((data) => {
+				console.log(data);
+			}).catch((error) => {
+				if (error == "invalid_qr_code") {
+					console.log('your_custom_error_message');
+					this.textQR = error;
+				} else {
+					//handle error here.
+					this.textQR = "error";
+				}
+			});
+		this.show2 = 'show';
+		console.log('this.show2 = ',this.show2);
+		// this.toggleAccordion('idx');
 	}
 
+	exit_from_qr_scan(): void {
+		this.qrheader = false;
+		ToolBox.hideCamera();
+	}
+	change_camera(): void {
+		this.qrscan.chnage_camera();
+	}
+	light_enable_desable(): void {
+		this.qrscan.enaable_desable_light();
+	}
+
+	toggleAccordion(idx) {
+		if (this.isLevelShown(idx)) {
+			this.show = null;
+		} else {
+			this.show = idx;
+		}
+	}
+
+	isLevelShown(idx) {
+		return this.show === idx;
+	};
 }
