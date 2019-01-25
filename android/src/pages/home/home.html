@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-	<div *ngIf="!isLevelShown('idx')" class="{{show2}}">
+	<div *ngIf="!isLevelShown('idx')">
 		<p>Инструкция использования данного приложения:</p>
 		<ol>
 			<li>Нажмите на кнопку</li>
@@ -13,20 +13,8 @@
 			<li>после сканирования экран закроется и отобразится результат сканирования</li>
 		</ol>
 	</div>
-	<p *ngIf="!isLevelShown('idx')" class="{{show2}}">
+	<p>
 		<button ion-button (click)="scan_qr_code();">Scaner</button>
 	</p>
-	<p class="{{show2}}" padding *ngIf="!isLevelShown('idx')">Результат: {{ textQR }}</p>
+	<p padding *ngIf="isLevelShown('idx')">Результат: {{ textQR }}</p>
 </ion-content>
-
-<div *ngIf="qrheader" class="div-scan">
-  <div class="scanner-object"></div>
-</div>
-
-<ion-footer *ngIf="qrheader">
-	<ion-row>
-		<ion-col col-4><ion-icon name="ios-arrow-dropleft-outline" class="qrscan-icon" (tap)="exit_from_qr_scan()"></ion-icon></ion-col>
-		<ion-col col-4><ion-icon name="flash" class="qrscan-icon" (tap)="light_enable_desable()"></ion-icon></ion-col>
-		<ion-col col-4><ion-icon name="camera" class="qrscan-icon" (tap)= "change_camera()"></ion-icon></ion-col>
-	</ion-row>
-</ion-footer>

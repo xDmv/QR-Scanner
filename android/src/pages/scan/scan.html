@@ -1,9 +1,21 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>scan</ion-title>
+		<ion-title>Scaning</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
 </ion-content>
+
+<div *ngIf="qrheader" class="div-scan">
+	<div class="scanner-object"></div>
+</div>
+
+<ion-footer *ngIf="qrheader">
+	<ion-row>
+		<ion-col col-4><ion-icon name="ios-arrow-dropleft-outline" class="qrscan-icon" (tap)="exit_from_qr_scan()"></ion-icon></ion-col>
+		<ion-col col-4><ion-icon name="flash" class="qrscan-icon" (tap)="light_enable_desable()"></ion-icon></ion-col>
+		<ion-col col-4><ion-icon name="camera" class="qrscan-icon" (tap)= "change_camera()"></ion-icon></ion-col>
+	</ion-row>
+</ion-footer>
