@@ -26,8 +26,9 @@ help:
 	@echo '  $(GREEN)build-dev   $(RESET) - build environment: dev'
 	@echo '  $(GREEN)build-prod  $(RESET) - build environment: prod'
 	@echo '$(YELLOW)development$(RESET):'
-	@echo '  $(GREEN)serve   $(RESET) - builds, serves, rebuilding on changes'
-	@echo '  $(GREEN)dep     $(RESET) - install node dependencies'
+	@echo '  $(GREEN)serve   $(RESET) 	- builds, serves, rebuilding on changes'
+	@echo '  $(GREEN)generate   $(RESET) 	- generate: component, derictive, page, pipe, provider, tabs'
+	@echo '  $(GREEN)dep     $(RESET) 	- install node dependencies'
 	@echo '$(YELLOW)setup$(RESET):'
 	@echo '  $(GREEN)ionic   $(RESET) - install ionic, cordova'
 
@@ -54,6 +55,10 @@ dep: dir
 		echo "$(GREEN)Dependencies$(RESET)..."; \
 		npm install; \
 	fi
+
+generate: dep ionic
+	@echo '$(GREEN)Generate$(RESET)...'
+	@cd $(APP_PATH) && ionic generate
 
 platform: dir ionic
 	@echo '$(GREEN)Platform$(RESET)...'
