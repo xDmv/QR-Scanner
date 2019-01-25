@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar>
+	<ion-navbar color="secondary">
 		<ion-title><span center>QR-scaner</span></ion-title>
 	</ion-navbar>
 </ion-header>
@@ -16,5 +16,5 @@
 	<p>
 		<button ion-button (click)="scan_qr_code();">Scaner</button>
 	</p>
-	<p padding *ngIf="isLevelShown('idx')">Результат: {{ textQR }}</p>
+	<p padding>Результат: {{ textQR }}</p>
 </ion-content>

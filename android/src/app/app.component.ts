@@ -18,16 +18,21 @@ export class MyApp {
 		platform				: Platform,
 		statusBar				: StatusBar,
 		splashScreen			: SplashScreen) {
-			this.StartApp();
+			//this.startApp();
+			platform.ready().then(() => {
+				//this.initQrcode();
+				statusBar.styleDefault();
+				splashScreen.hide();
+			});
 	}
 
-	StartApp(){
-		platform.ready().then(() => {
-			this.initQrcode();
-			statusBar.styleDefault();
-			splashScreen.hide();
-		});
-	}
+	// startApp(){
+	// 	platform.ready().then(() => {
+	// 		this.initQrcode();
+	// 		this.statusBar.styleDefault();
+	// 		this.splashScreen.hide();
+	// 	});
+	// }
 
 	initQrcode(){
 		// Optionally request the permission early

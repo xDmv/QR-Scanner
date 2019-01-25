@@ -5,6 +5,7 @@ import { IonicApp, IonicModule, IonicErrorHandler 	} from 'ionic-angular';
 import { MyApp 										} from './app.component';
 import { HomePage 									} from '../pages/home/home';
 import { ScanPage 									} from '../pages/scan/scan';
+import { RezulPage 									} from '../pages/rezul/rezul';
 
 import { StatusBar 									} from '@ionic-native/status-bar';
 import { SplashScreen 								} from '@ionic-native/splash-screen';
@@ -15,14 +16,16 @@ import { QrScan 									} from '../providers/qr-scan/qr-scan';
 	declarations: [
 		MyApp,
 		HomePage,
-		ScanPage
+		ScanPage,
+		RezulPage
 	],
 	imports: [BrowserModule, IonicModule.forRoot(MyApp)],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
 		HomePage,
-		ScanPage
+		ScanPage,
+		RezulPage
 	],
 	providers: [StatusBar, SplashScreen,QRScanner, {provide: ErrorHandler, useClass: IonicErrorHandler}, QrScan]
 })

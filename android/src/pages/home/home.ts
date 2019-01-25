@@ -1,5 +1,6 @@
 import { Component 			} from '@angular/core';
 import { NavController 		} from 'ionic-angular';
+import { NavParams 			} from 'ionic-angular';
 
 import { ScanPage 			} from '../scan/scan';
 
@@ -14,12 +15,13 @@ export class HomePage {
 	servicesData 	: { data: string};
 
 	constructor(
-		public navCtrl		: NavController
+		public navCtrl		: NavController,
+		public navParams	: NavParams
 		) {
-			// if(this.navParams.data){
-			// 	this.servicesData = this.navParams.data;
-			// 	this.textQR = this.servicesData.data;
-			// }
+			if(this.navParams.data){
+				this.servicesData = this.navParams.data;
+				this.textQR = this.servicesData.data;
+			}
 	}
 
 	ionViewDidLoad() {

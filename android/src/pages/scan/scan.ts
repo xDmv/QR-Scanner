@@ -29,7 +29,7 @@ export class ScanPage {
 						return Promise.reject("invalid_qr_code");
 					}
 					self.qrheader = false;
-					this.navCtrl.pop(HomePage, {data: qrcode});
+					this.navCtrl.setRoot(HomePage, {data: qrcode});
 					//this.textQR = qrcode;
 					//alert("Value：" + qrcode);
 					// return  your_method_with_passing_qr(qrcode);
@@ -38,11 +38,11 @@ export class ScanPage {
 				}).catch((error) => {
 					if (error == "invalid_qr_code") {
 						console.log('your_custom_error_message');
-						this.navCtrl.pop(HomePage, {data: error});
+						this.navCtrl.setRoot(HomePage, {data: error});
 						//this.textQR = error;
 					} else {
 						//handle error here.
-						this.navCtrl.pop(HomePage, {data: 'handle error here!!!'});
+						this.navCtrl.setRoot(HomePage, {data: 'handle error here!!!'});
 						// this.textQR = "error";
 					}
 				});
