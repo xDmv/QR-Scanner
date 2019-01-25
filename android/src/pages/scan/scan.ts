@@ -15,12 +15,13 @@ export class ScanPage {
 	qrheader		: boolean = false;
 
 	constructor(
-		public navCtrl		: NavController,
-		private qrscan		: QrScan,
-		public navParams	: NavParams) {
+		public navCtrl				: NavController,
+		private qrscan				: QrScan,
+		public navParams			: NavParams) {
+
+
 			let self = this;
 			this.qrheader = true;
-			console.log("Scan start");
 			Promise.resolve("proceed")
 				.then((k) => {
 					return this.qrscan.scan();

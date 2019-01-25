@@ -11,6 +11,7 @@ import { StatusBar 									} from '@ionic-native/status-bar';
 import { SplashScreen 								} from '@ionic-native/splash-screen';
 import { QRScanner 									} from '@ionic-native/qr-scanner';
 import { QrScan 									} from '../providers/qr-scan/qr-scan';
+//mport { AndroidPermissions 						} from '@ionic-native/android-permissions';
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,13 @@ import { QrScan 									} from '../providers/qr-scan/qr-scan';
 		ScanPage,
 		RezulPage
 	],
-	providers: [StatusBar, SplashScreen,QRScanner, {provide: ErrorHandler, useClass: IonicErrorHandler}, QrScan]
+	providers: [
+		StatusBar,
+		SplashScreen,
+		QRScanner,
+		//AndroidPermissions,
+		{provide: ErrorHandler, useClass: IonicErrorHandler},
+		QrScan
+	]
 })
 export class AppModule {}

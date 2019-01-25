@@ -5,7 +5,9 @@ import { SplashScreen 				} from '@ionic-native/splash-screen';
 
 import { HomePage 					} from '../pages/home/home';
 
-import {QRScanner, QRScannerStatus	} from "@ionic-native/qr-scanner";
+import { QRScanner, QRScannerStatus	} from "@ionic-native/qr-scanner";
+//import { AndroidPermissions 		} from '@ionic-native/android-permissions';
+
 
 @Component({
 	templateUrl			: 'app.html'
@@ -14,16 +16,26 @@ export class MyApp {
 	rootPage:any = HomePage;
 
 	constructor(
-		private qrScanner		: QRScanner,
-		platform				: Platform,
-		statusBar				: StatusBar,
-		splashScreen			: SplashScreen) {
+		private qrScanner				: QRScanner,
+		platform						: Platform,
+		statusBar						: StatusBar,
+		//private androidPermissions		: AndroidPermissions,
+		splashScreen					: SplashScreen) {
 			//this.startApp();
+			// platform.ready().then(() => {
+			// 	//this.initQrcode();
+			// 	statusBar.styleDefault();
+			// 	splashScreen.hide();
+			// });
 			platform.ready().then(() => {
+				// if(platform.is('android')){
+				// 	androidPermissions.checkPermission(androidPermissions.PERMISSION.CAMERA).then(result => alert('Give access to the camera, please, it is necessary to scan the QR-code'), err => androidPermissions.requestPermission(androidPermissions.PERMISSION.CAMERA));
+				// 	androidPermissions.requestPermission([androidPermissions.PERMISSION.CAMERA]);
+				// }
 				//this.initQrcode();
 				statusBar.styleDefault();
 				splashScreen.hide();
-			});
+		});
 	}
 
 	// startApp(){
