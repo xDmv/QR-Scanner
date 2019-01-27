@@ -1,7 +1,9 @@
 <ion-header>
 	<ion-navbar color="secondary">
-		<ion-title><span center>QR-scaner</span></ion-title>
-		<ion-buttons end>
+		<ion-title>
+			<span center>QR-scaner</span>
+		</ion-title>
+		<ion-buttons end round large color="light">
 			<button ion-button>
 				<ion-icon name="settings">
 				</ion-icon>
@@ -11,16 +13,43 @@
 </ion-header>
 
 <ion-content padding>
-	<div *ngIf="!isLevelShown('idx')">
+	<!-- <ion-grid>
+		<ion-row>
+			<ion-col col-8>
+				Возможности
+			</ion-col>
+			<ion-col col-4>
+				Описание
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-6>
+					<button ion-button (click)="scan_qr_code();" color="dark">Сканировать</button>
+			</ion-col>
+			<ion-col col-6>
+				<ion-item>
+				<ion-toggle [(ngModel)]="scaner" (ionChange)="tempfun(scaner)" checked="false"></ion-toggle>
+				</ion-item>
+				<div *ngIf="scaner">сканер может ....</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<p>scaner: {{ scaner }}</p>
+	<p>temp: {{ temp }}</p> -->
+	<div>
 		<p>Инструкция использования данного приложения:</p>
 		<ol>
-			<li>Нажмите на кнопку</li>
+			<li>Нажмите на кнопку "Scaner"</li>
 			<li>Наведите мобильный на QR-код</li>
-			<li>после сканирования экран закроется и отобразится результат сканирования</li>
+			<li>После сканирования экран закроется и отобразится результат сканирования</li>
 		</ol>
 	</div>
 	<p>
-		<button ion-button (click)="scan_qr_code();">Scaner</button>
+		<button ion-button (click)="scan_qr_code();" color="dark">Scaner</button>
 	</p>
-	<p padding>Результат: {{ textQR }}</p>
+	<div *ngIf="!isLevelShown('idx')" color="secondary">
+		<p>Результат сканирования:</p>
+		<p>{{ textQR }}</p>
+	</div>
 </ion-content>

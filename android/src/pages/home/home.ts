@@ -13,6 +13,8 @@ export class HomePage {
 	textQR			: string;
 	show 			= null;
 	servicesData 	: { data: string};
+	scaner: any;
+	temp: string;
 
 	constructor(
 		public navCtrl		: NavController,
@@ -29,7 +31,7 @@ export class HomePage {
 		if(this.navParams.data){
 			this.servicesData = this.navParams.data;
 			this.textQR = this.servicesData.data;
-			//this.toggleAccordion('idx');
+			this.toggleAccordion('idx');
 		}
 	}
 
@@ -42,7 +44,14 @@ export class HomePage {
 		// this.toggleAccordion('idx');
 	}
 
-
+	tempfun(en: boolean){
+		if(en == true){
+			this.temp = 'Выполняется функция';
+		}
+		else{
+			this.temp = 'Останавливается функция';
+		}
+	}
 
 	toggleAccordion(idx) {
 		if (this.isLevelShown(idx)) {
